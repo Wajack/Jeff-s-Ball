@@ -48,7 +48,7 @@
             <string>///Initialize Variables
 grav = 1;
 spd = 4;
-jspd = 15;
+jspd = 12;
 hspd = 0;
 vspd = 0;
 </string>
