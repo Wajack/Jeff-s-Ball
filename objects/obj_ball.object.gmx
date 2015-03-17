@@ -131,6 +131,65 @@ if (place_meeting(x, y+vspd, obj_solid)){
 
 //move vertically
 y += vspd;
+
+///platform physics
+var rkey = keyboard_check(vk_right);
+var lkey = keyboard_check(vk_left);
+var jkey = keyboard_check(vk_up);
+
+//check for ground
+if (place_meeting(x, y+1, obj_solid)){
+    vspd = 0;
+    
+    //Jumping
+    if (jkey){
+        vspd = -jspd;
+    }
+}else{
+    //gravity
+    if (vspd &lt; 10){
+        vspd += grav;
+    }
+}
+
+//movement
+if (rkey){
+    hspd = spd;
+}
+
+if (lkey){
+    hspd = -spd;
+}
+
+//check if not moving
+if ((!rkey &amp;&amp; !lkey) || (rkey &amp;&amp; lkey)){
+    hspd = 0;
+}
+
+
+//Horizontal collisions
+if (place_meeting(x+hspd, y, obj_solid)){
+    while (!place_meeting(x+sign(hspd), y, obj_solid)){
+        x += sign(hspd);
+    }
+    hspd = 0;
+}
+
+//move horizontally
+x += hspd;
+
+//Vertical collisions
+if (place_meeting(x, y+vspd, obj_solid)){
+    while (!place_meeting(x, y+sign(vspd), obj_solid)){
+        y += sign(vspd);
+    }
+    vspd = 0;
+}
+
+//move vertically
+y += vspd;
+
+
 </string>
           </argument>
         </arguments>
